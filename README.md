@@ -15,3 +15,8 @@ Install requirements
 ```
 pip install -r requirements.txt
 ```
+
+To run backend + frontend:
+- in backend folder: ```python server.py```
+    - to see backend: http://127.0.0.1:4999/data
+- in frontend folder: ```npm start```
