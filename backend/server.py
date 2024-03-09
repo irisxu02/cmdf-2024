@@ -1,28 +1,28 @@
-# Filename - server.py
+from flask import Flask, jsonify, make_response
 
-# Import flask and datetime module for showing date and time
-from flask import Flask
-import datetime
-
-x = datetime.datetime.now()
-
-# Initializing flask app
 app = Flask(__name__)
 
+# Helper function to set CORS headers
+def add_cors_headers(response):
+    response.headers['Access-Control-Allow-Origin'] = '*'
+    response.headers['Access-Control-Allow-Headers'] = 'Content-Type'
+    response.headers['Access-Control-Allow-Methods'] = 'GET, POST, PUT, DELETE, OPTIONS'
+    return response
 
-# Route for seeing a data
 @app.route('/data')
-def get_time():
-
-	# Returning an api for showing in reactjs
-	return {
-		'Name':"geek", 
-		"Age":"22",
-		"Date":x, 
-		"programming":"python"
-		}
+def get_data():
+    # Your code to fetch data
+    data = {
+        "Name": "John Doe",
+        
+        "Age": 30,
+        "Date": "2024-03-09",
+        "programming": "Python"
+    }
+    response = make_response(jsonify(data))
+    return add_cors_headers(response)
 
 	
 # Running app
 if __name__ == '__main__':
-	app.run(debug=True)
+	app.run(host='0.0.0.0', port=4999, debug=True)
