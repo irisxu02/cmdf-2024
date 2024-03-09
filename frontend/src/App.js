@@ -5,8 +5,7 @@ import React, { useState, useEffect } from "react";
 import "./App.css";
 
 function App() {
-	// usestate for setting a javascript
-	// object for storing and using data
+	// SAMPLE FIELDS
 	const [data, setdata] = useState({
 		name: "",
 		age: 0,
@@ -14,33 +13,47 @@ function App() {
 		programming: "",
 	});
 
-	// Using useEffect for single rendering
-	useEffect(() => {
-		// Using fetch to fetch the api from 
-		// flask server it will be redirected to proxy
-		fetch("http://127.0.0.1:4999/data").then((res) =>
-			res.json().then((data) => {
-				// Setting a data from api
-				setdata({
-					name: data.Name,
-					age: data.Age,
-					date: data.Date,
-					programming: data.programming,
-				});
-			})
-		);
-	}, []);
+	const [inputValue, setInputValue] = useState('');
+	const handleInputChange = (event) => {
+		setInputValue(event.target.value);
+		console.log(inputValue);
+	  };
+
+	  const handleSubmit = () => {
+        // Send a POST request to the Flask server
+        fetch("http://127.0.0.1:4999/data", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ inputValue }),
+        })
+            .then((res) => res.json())
+            .then((data) => {
+				setdata(data);
+                console.log("Response from server:", data);
+            })
+            .catch((error) => {
+                console.error("Error:", error);
+            });
+    };
 
 	return (
 		<div className="App">
 			<header className="App-header">
 				<h1>React and flask</h1>
-				{/* Calling a data from setdata for showing */}
+				{/* SAMPLE CONTENT */}
 				<p>{data.name}</p>
 				<p>{data.age}</p>
 				<p>{data.date}</p>
 				<p>{data.programming}</p>
-
+				{/* TEST CONTENT */}
+				<input 
+					type="text" 
+					value={inputValue} 
+					onChange={handleInputChange} 
+      			/>
+				<button onClick={handleSubmit}>submit</button>
 			</header>
 		</div>
 	);
