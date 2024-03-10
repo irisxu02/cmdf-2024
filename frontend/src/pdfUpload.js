@@ -15,7 +15,7 @@ const PDFUpload = ({setInput, setPDF, pdf}) => {
       <label htmlFor="fileInput">
         <input htmlFor="fileInput" id="fileInput" type="file" onChange={handleFileChange} accept=".pdf" style={{ display: "none" }} />
         <span className="icon">
-          {pdf ? <FaRegCheckCircle style={{ color: "0B91E9" }} /> :  <FaFileUpload style={{ color: "white" }} />}
+          {pdf ? <FaRegCheckCircle style={{ color: "0B91E9" }} /> :  <FaFileUpload/>}
           </span>
     </label>
     </div>
