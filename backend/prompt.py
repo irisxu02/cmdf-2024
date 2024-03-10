@@ -96,8 +96,6 @@ class KnowledgeExpert:
             # This swap helps create better responses
             if type == "adult":
                 type = "pro"
-            if type == "toddler":
-                type = "baby"
             prompt_primer = f'I am a {type}. My vocabulary level is {user_details["vocabulary"]} and I have {user_details["education"]} and my knowledge includes {user_details["knowledge_base"]}. I relate to {user_details["motivation"]}. '
         else:
             prompt_primer = f'I am a {type}. '
