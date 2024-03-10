@@ -272,6 +272,7 @@ const Basic = () => {
               id="basic"
               className={basicButtonClass}
               onClick={handleBasicClick}
+              aria-label="basic view button"
             >
               BASIC
             </div>
@@ -280,6 +281,7 @@ const Basic = () => {
               id="advanced"
               className={advancedButtonClass}
               onClick={handleAdvancedClick}
+              aria-label="advanced view button"
             >
               ADVANCED
             </div>
@@ -302,6 +304,7 @@ const Basic = () => {
               pdf={selectedPDF}
             />
             <div className="subtext">To Me Like I'm</div>
+            <label for="age" style={{position: "absolute", left: "-9999px"}}>Age:</label>
             <select
               id="age"
               name="age"
@@ -342,7 +345,7 @@ const Basic = () => {
             <div className="subtext">.</div>
           </div>
           <div className="center">
-            <button onClick={handleSubmit} className="fancy center">
+            <button onClick={handleSubmit} className="fancy center" aria-label="explain">
               EXPLAIN
             </button>
           </div>

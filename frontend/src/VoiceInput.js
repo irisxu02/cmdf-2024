@@ -34,7 +34,7 @@ const Dictaphone = ({ setInput }) => {
 
   return (
     <div>
-      <button className="icon" onClick={toggleListening}>
+      <button id="voiceInput" aria-label="voiceInput" className="icon" onClick={toggleListening}>
         {isListening ? (
           <FaMicrophone style={{ color: "#0B91E9" }} />
         ) : (
