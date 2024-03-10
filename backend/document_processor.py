@@ -1,9 +1,10 @@
 from PyPDF2 import PdfReader
 import pandas as pd
+import numpy as np
 from io import StringIO
 
 
-def get_text(pdf_path='demo_assets/EthicsofAI.pdf', pages=[1,2]):
+def get_text(pdf_path='../demo_assets/EthicsofAI.pdf', pages=[1,2]):
     reader = PdfReader(pdf_path)
     parts = []
 

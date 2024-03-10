@@ -19,6 +19,7 @@ def get_data():
         data = request.json
         print(data["inputValue"])
         answer = prompt.fetch_answer(data["inputValue"])
+        print(answer)
         # handle data here
         return add_cors_headers(jsonify(data))
 
