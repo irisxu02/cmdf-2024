@@ -1,13 +1,149 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-family: 'tomorrow', sans-serif;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+.logo {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.homeContent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+  background-color: rgba(255, 255, 255, 0.6); /* 20% white */
+}
+
+.title {
+  font-size: 50px;
+  font-family: 'tomorrow', sans-serif;
+  font-weight: 600;
+  padding:50px;
+  z-index: 10;
+}
+
+.subheading {
+  font-size: 30px;
+  font-family: 'tomorrow', sans-serif;
+  font-weight: 600;
+  z-index: 10;
+}
+
+.subtext {
+  font-size: 25px;
+  font-family: 'tomorrow', sans-serif;
+  font-weight: 400;
+  z-index: 10;
+}
+
+.gradientFont {
+  background: linear-gradient(to right, #0B91E9, #E83AA2);
+  -webkit-background-clip: text; /* For Safari/Chrome */
+  -moz-background-clip: text; /* For Firefox */
+  -ms-background-clip: text; /* For Internet Explorer/Edge */
+  color: transparent; /* Make the font color transparent */
+  width:fit-content;
+}
+
+input {
+  outline: none;
+  width: 100%;
+  font-size: 20px;
+  border: none;
+}
+
+.basicPrompt {
+  padding:  100px 200px;
+}
+
+.prompt {
+  display: flex;
+  padding-top: 50px;
+  flex-wrap: wrap;
+}
+
+.prompt > * {
+  margin-bottom: 40px; /* Add margin at the bottom to create vertical space between rows */
+}
+
+.fullWidthInput {
+  width: calc(100% - 120px);
+  margin: 0 10px;
+  margin-bottom: 40px; 
+  border-bottom: #0B91E9 2px solid;
+  font-family: 'tomorrow', sans-serif;
+  color:#0B91E9;
+}
+
+select {
+  border: none;
+}
+
+.dropdown {
+  margin: 0 10px;
+  margin-bottom: 40px; 
+  border-bottom: #0B91E9 2px solid;
+  font-size: 20px;
+  font-family: 'tomorrow', sans-serif;
+  color:#0B91E9;
+}
+
+.logoRight {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 20px;
+  padding: 50px;
+  padding-bottom: 0;
+}
+
+.navLinks {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 100px;
+  z-index: 1;
+}
+
+.fancy{
+  border: none;
+  color: white;
+  font-weight: 600;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 20px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 100px;
+  background: linear-gradient(to right, #0B91E9, #E83AA2);
+  width: 250px;
+  font-family: 'tomorrow', sans-serif;
+  
+}
+
+
+#particles-js {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-image: url("");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 50% 50%;
+  z-index: 0;
 }
