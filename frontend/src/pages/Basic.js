@@ -8,6 +8,7 @@ import { useEffect } from "react";
 import Toggle from "../Toggle";
 import { useLocation } from "react-router-dom";
 import loading from "../imgs/load-35_256.gif";
+import ScrollToTopButton from "../ScrollTop";
 
 const Basic = () => {
   const [inputValue, setInputValue] = useState("");
@@ -51,6 +52,14 @@ const Basic = () => {
     } catch (error) {
       console.error("Error uploading file:", error);
     }
+  };
+
+  const handleGoUp = () => {
+    console.log("hello");
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
   };
 
   const handleSubmit = () => {
@@ -255,8 +264,9 @@ const Basic = () => {
   return (
     <>
       <main className="basicContent">
+      <ScrollToTopButton handleClick={handleGoUp} />
         <div id="particles-js"></div>
-        <div className="logoRight">
+        <div id="logoRight" className="logoRight">
           <div style={{ display: "flex", alignItems: "center", gap: "20px" }}>
             <Link to="/">
               <img src={logo} alt="logo" />
