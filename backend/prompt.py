@@ -70,7 +70,7 @@ def create_prompt(question_input, type=None):
 def list_citations(response):
     urls = []
     for d in response.documents:
-        urls.append[d["url"]]
+        urls.append(d["url"])
     return urls
 
 
