@@ -1,0 +1,22 @@
+[
+    {
+        "message": "Who discovered gravity?",
+        "role": "USER"
+    },
+    {
+        "message": "The man who is widely credited with discovering gravity is Sir Isaac Newton",
+        "role": "CHATBOT"
+    },
+    {
+        "message": "What year was he born?",
+        "response_id": "f87c6b7c-0be6-400f-9d59-739ed0ce469e",
+        "generation_id": "a7e34c7c-ea66-4b73-8281-41bbe7da07c1",
+        "role": "USER"
+    },
+    {
+        "message": "Isaac Newton was born on December 25, 1642 (according to the Julian calendar), which was in use at the time of his birth. However, because England didn't adopt the Gregorian calendar until 1752, his birth date would be recorded as January 4, 1643, according to the Gregorian calendar. This means that, historically, Newton's birth date has been recorded twice.",
+        "response_id": "f87c6b7c-0be6-400f-9d59-739ed0ce469e",
+        "generation_id": "c7aa2827-9812-49b7-9db4-15a2616b3550",
+        "role": "CHATBOT"
+    }
+]
