@@ -83,7 +83,7 @@ def get_basic_data():
             text = get_text(pdf_uploaded)
             response = expert.fetch_response(text)
         else:
-            pdf_uploaded = None
+            pdf_uploaded = ""
             response = expert.test_simple_response(data["inputValue"])  # TODO: use fetch_response
             print(f"COHERE RESPONSE: {response.text}")
         
@@ -112,7 +112,7 @@ def get_advanced_data():
             text = get_text(pdf_uploaded)
             response = expert.fetch_response(text, type=data["ageGroup"], role=data["role"])
         else: # text input only mode
-            pdf_uploaded = None
+            pdf_uploaded = ""
             response = expert.fetch_response(data["inputValue"], type=data["ageGroup"], role=data["role"])
             print(f"COHERE RESPONSE: {response.text}")
         
