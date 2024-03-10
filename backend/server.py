@@ -102,7 +102,7 @@ def get_advanced_data():
         data = request.json
         print(data["ageGroup"]) # "baby", "child", "teen", "adult"
         print(data["role"]) # Any
-        print(f'length: {len([data["length"].split(" ")])}') # point form, sentence, paragraph
+        print(data["length"]) # point form, sentence, paragraph
         expert.set_format_preference(data["length"])
         print(f'READ INPUT: {data["inputValue"]}')
 
