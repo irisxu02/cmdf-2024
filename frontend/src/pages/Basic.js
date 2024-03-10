@@ -12,14 +12,41 @@ import ScrollToTopButton from "../ScrollTop";
 
 const Basic = () => {
   const [inputValue, setInputValue] = useState("");
-  const [ageGroup, setAgeGroup] = useState("toddler");
+  const [ageGroup, setAgeGroup] = useState("");
   const [role, setRole] = useState("");
   const [length, setLength] = useState("");
-  const [response, setResponse] = useState("");
+  const [response, setResponse] = useState();
   const location = useLocation();
   const [mode, setMode] = useState("basic");
   const [isLoading, setIsLoading] = useState(false);
   const [selectedPDF, setSelectedPDF] = useState(null);
+  const [responseText, setResponseText] = useState("");
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const inputValueParam = params.get("inputValue");
+    const ageGroupParam = params.get("ageGroup");
+    const modeParam = params.get("mode");
+    const responseParam = params.get("responseText");
+
+    if (inputValueParam) setInputValue(inputValueParam);
+    if (ageGroupParam) {
+      setAgeGroup(ageGroupParam)
+    } else {
+      setAgeGroup("baby");
+    }
+    if (modeParam) setMode(modeParam);
+    if (responseParam) {
+      document.getElementById("response").style.display = "flex";
+      setResponseText(responseParam)
+    }
+  }, []);
+
+  const shareableLink = `${window.location.origin}/demo?inputValue=${encodeURIComponent(
+    inputValue
+  )}&ageGroup=${encodeURIComponent(ageGroup)}&mode=${encodeURIComponent(
+    mode
+  )}&responseText=${encodeURIComponent(responseText)}`;
 
   const handleInputChange = (event) => {
     setInputValue(event.target.value);
@@ -32,6 +59,15 @@ const Basic = () => {
   };
   const handleRoleChange = (event) => {
     setRole(event.target.value);
+  };
+
+  const handleShare = async () => {
+    try {
+      await navigator.clipboard.writeText(shareableLink);
+      alert("Link copied to clipboard!");
+    } catch (error) {
+      console.error('Failed to copy link: ', error);
+    }
   };
 
   const handleSubmitPDF = async () => {
@@ -86,6 +122,7 @@ const Basic = () => {
         .then((res) => res.json())
         .then((data) => {
           setResponse(data);
+          setResponseText(data.text);
           setIsLoading(false);
           console.log(isLoading);
           console.log("Response from server:", data);
@@ -322,6 +359,7 @@ const Basic = () => {
               name="age"
               className="dropdown"
               onChange={handleAgeChange}
+              value={ageGroup}
             >
               <option value="baby">a Baby</option>
               <option value="child">a Child</option>
@@ -369,8 +407,12 @@ const Basic = () => {
         <div className="response" id="response">
           <div className="subheading gradientFont">EMILI says...</div>
           {isLoading && <img src={loading} alt="Loading..." />}
-
-          {!isLoading && response.text && (
+          {!isLoading && !response?.text && responseText!=="" && mode === "basic" &&(
+            <div className="responseText">
+            {responseText}
+          </div>
+          )}
+          {!isLoading && response?.text && (
             <div className="responseText">
               {response.text?.split("\n").map((line, index) => {
                 if (line.trim().startsWith("-")) {
@@ -385,7 +427,7 @@ const Basic = () => {
                 Sources
               </div>
               <ol class="sources-container">
-                {response.citations.map((citation, index) => (
+                {response?.citations.map((citation, index) => (
                   <li key={index} className="source">
                     <a
                       href={citation}
@@ -398,6 +440,11 @@ const Basic = () => {
                   </li>
                 ))}
               </ol>
+              <div className="center" style={{marginTop: '50px'}}>
+                <button onClick={handleShare} className="fancy center" aria-label="explain">
+                SHARE
+              </button>
+              </div>
             </div>
           )}
         </div>
