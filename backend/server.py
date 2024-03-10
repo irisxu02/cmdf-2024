@@ -17,11 +17,11 @@ def get_data():
         return add_cors_headers(make_response()), 200
     if request.method == 'POST':
         data = request.json
-        print(data["inputValue"])
+        print(f'READ INPUT: {data["inputValue"]}')
         response = prompt.fetch_response(data["inputValue"])
-        print(response.text)
+        print(f"COHERE RESPONSE: {response.text}")
         citations = prompt.list_citations(response)
-        return add_cors_headers(jsonify(data))
+        return add_cors_headers(jsonify(response.text))
 
 # Running app
 if __name__ == '__main__':

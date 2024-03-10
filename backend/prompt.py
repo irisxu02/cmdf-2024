@@ -44,12 +44,13 @@ def fetch_response(question_input, type=None):
         preamble="You are an expert teacher on a mission to educate people of all ages and backgrounds using your wide array of knowledge across domains, giving explanations as short and simple or in-depth and complex as the user can understand at their level.",
         connectors=[{"id": "web-search"}]
     )
+    print(message)
     return response
 
 
 def create_prompt(question_input, type=None):
     if type is None:
-        return "Explain {question_input}."
+        return f"Explain {question_input}."
     
     prompt_primer = ""
     if type in user_categories:
