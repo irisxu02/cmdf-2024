@@ -35,11 +35,21 @@ code {
   z-index: 10;
 }
 
+.grey {
+  color: rgb(197, 197, 197) !important;
+  cursor: pointer;
+}
+
 .subheading {
   font-size: 30px;
   font-family: 'tomorrow', sans-serif;
   font-weight: 600;
   z-index: 10;
+}
+
+.views {
+  display: flex;
+  gap: 50px;
 }
 
 .subtext {
@@ -69,6 +79,13 @@ input {
   padding:  100px 200px;
 }
 
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
 .prompt {
   display: flex;
   padding-top: 50px;
@@ -81,6 +98,15 @@ input {
 
 .fullWidthInput {
   width: calc(100% - 120px);
+  margin: 0 10px;
+  margin-bottom: 40px; 
+  border-bottom: #0B91E9 2px solid;
+  font-family: 'tomorrow', sans-serif;
+  color:#0B91E9;
+}
+
+.inputField {
+  width: 200px;
   margin: 0 10px;
   margin-bottom: 40px; 
   border-bottom: #0B91E9 2px solid;
