@@ -18,6 +18,7 @@ def get_data():
     if request.method == 'POST':
         data = request.json
         print(data["inputValue"])
+        print(data["ageGroup"])
         answer = prompt.fetch_answer(data["inputValue"])
         print(answer)
         # handle data here
