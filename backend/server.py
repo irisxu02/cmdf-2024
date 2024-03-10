@@ -49,8 +49,25 @@ def get_upload():
         d['status'] = 1
         return add_cors_headers(jsonify("PDF Received"))
     
-@app.route('/data', methods=['GET', 'POST', 'OPTIONS'])
-def get_data():
+@app.route('/basic', methods=['GET', 'POST', 'OPTIONS'])
+def get_basic_data():
+    if request.method == 'OPTIONS':
+        return add_cors_headers(make_response()), 200
+    if request.method == 'POST':
+        data = request.json
+        print(data["ageGroup"])
+        print(f'READ INPUT: {data["inputValue"]}')
+        response = prompt.fetch_response(data["inputValue"])
+        print(f"COHERE RESPONSE: {response.text}")
+        citations = prompt.list_citations(response)
+        response_with_citations = {
+        "text": response.text,
+        "citations": citations
+    }
+        return add_cors_headers(jsonify(response_with_citations))
+    
+@app.route('/advanced', methods=['GET', 'POST', 'OPTIONS'])
+def get_advanced_data():
     if request.method == 'OPTIONS':
         return add_cors_headers(make_response()), 200
     if request.method == 'POST':
