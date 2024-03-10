@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import logo from "../imgs/logo.png";
 import VoiceInput from "../VoiceInput";
+import PDFUpload from "../pdfUpload";
 import "../index.css";
 
 const Basic = () => {
@@ -130,6 +131,7 @@ const Basic = () => {
             <button onClick={handleSubmit} className="fancy center">EXPLAIN</button>
             <p>{response}</p>
           </div>
+          <PDFUpload />
         </div>
       </main>
     </>
