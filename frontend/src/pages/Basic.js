@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import logo from "../imgs/logo.png";
+import VoiceInput from "../VoiceInput"
 import "../index.css";
 
 const Basic = () => {
@@ -52,7 +53,9 @@ const Basic = () => {
               class="fullWidthInput"
               placeholder="type something you want to know here..."
               onChange={handleInputChange}
+              value={inputValue}
             />
+            <VoiceInput setInput={setInputValue}/>
             <div className="subtext">To Me Like I'm</div>
             <select id="age" name="age" class="dropdown" onChange={handleAgeChange}>
               <option value="0-10">a Toddler</option>
