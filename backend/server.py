@@ -1,6 +1,8 @@
 from flask import Flask, jsonify, make_response, request
 import prompt
 from io import BytesIO
+import os
+import pdfkit
 
 app = Flask(__name__)
 
@@ -22,10 +24,15 @@ def get_upload():
         print(f"Uploading file {filename}")
         file_bytes = file.read()
         file_content = BytesIO(file_bytes).readlines()
-        print(file_content)
+        
+        # Save the file as PDF
+        upload_dir = os.path.join(os.getcwd(), 'uploads')
+        os.makedirs(upload_dir, exist_ok=True) 
+        pdf_filename = os.path.join(upload_dir, filename)
+        with open(pdf_filename, 'wb') as f:
+            f.write(file_bytes)
+
         d['status'] = 1
-        # data = request.json
-        # print(data)
         return add_cors_headers(jsonify("PDF Received"))
     
 @app.route('/data', methods=['GET', 'POST', 'OPTIONS'])

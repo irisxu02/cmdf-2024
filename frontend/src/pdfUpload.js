@@ -10,12 +10,6 @@ const PDFUpload = () => {
     setUploadStatus(null);
   };
 
-//   const dataToSend = {
-//     name: "John Doe",
-//     age: 30,
-//     email: "john@example.com"
-//   };
-
   const handleSubmit = async () => {
     const formData = new FormData();
     formData.append('pdfFile', selectedFile);
@@ -23,10 +17,6 @@ const PDFUpload = () => {
     try {
       const response = await fetch("http://127.0.0.1:4999/upload", {
         method: 'POST',
-        // headers: {
-        //     "Content-Type": "application/json",
-        // },
-        // body: JSON.stringify(dataToSend),
         body: formData,
       });
 
