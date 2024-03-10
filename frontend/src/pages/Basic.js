@@ -324,7 +324,7 @@ const Basic = () => {
                   id="explain"
                   name="explain"
                   class="inputField"
-                  placeholder="role type"
+                  placeholder="chemist"
                   onChange={handleRoleChange}
                 />
                 <div className="subtext">in </div>
@@ -334,7 +334,7 @@ const Basic = () => {
                   class="dropdown"
                   onChange={handleLengthChange}
                 >
-                  <option value="point form">point form</option>
+                  <option value="pointform">point form</option>
                   <option value="sentence">a sentence</option>
                   <option value="paragraph">a paragraph</option>
                 </select>
