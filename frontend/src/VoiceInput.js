@@ -1,13 +1,16 @@
-import React from 'react';
-import { useState, useEffect } from 'react';
-import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
+import React from "react";
+import { useState, useEffect } from "react";
+import SpeechRecognition, {
+  useSpeechRecognition,
+} from "react-speech-recognition";
+import { FaMicrophone } from "react-icons/fa";
 
 const Dictaphone = ({ setInput }) => {
   const {
     transcript,
     listening,
     resetTranscript,
-    browserSupportsSpeechRecognition
+    browserSupportsSpeechRecognition,
   } = useSpeechRecognition();
 
   const [isListening, setIsListening] = useState(false);
@@ -31,9 +34,13 @@ const Dictaphone = ({ setInput }) => {
 
   return (
     <div>
-      <button onClick={toggleListening}>
-      {isListening ? 'Stop' : 'Start'}
-    </button>
+      <button className="icon" onClick={toggleListening}>
+        {isListening ? (
+          <FaMicrophone style={{ color: "#E83AA2" }} />
+        ) : (
+          <FaMicrophone style={{ color: "#0B91E9" }} />
+        )}
+      </button>
     </div>
   );
 };

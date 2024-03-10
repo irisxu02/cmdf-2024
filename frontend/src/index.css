@@ -40,6 +40,16 @@ code {
   cursor: pointer;
 }
 
+.icon {
+  font-size: 20px;
+  color: #0B91E9;
+  cursor: pointer;
+  text-decoration: none;
+  background-color: white;
+  border: none;
+  
+}
+
 .subheading {
   font-size: 30px;
   font-family: 'tomorrow', sans-serif;
@@ -53,7 +63,7 @@ code {
 }
 
 .subtext {
-  font-size: 25px;
+  font-size: 20px;
   font-family: 'tomorrow', sans-serif;
   font-weight: 400;
   z-index: 10;
@@ -96,8 +106,15 @@ input {
   margin-bottom: 40px; /* Add margin at the bottom to create vertical space between rows */
 }
 
+.prompt2 {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: -20px;
+}
+
+
 .fullWidthInput {
-  width: calc(100% - 120px);
+  width: calc(100% - 180px);
   margin: 0 10px;
   margin-bottom: 40px; 
   border-bottom: #0B91E9 2px solid;
@@ -112,6 +129,7 @@ input {
   border-bottom: #0B91E9 2px solid;
   font-family: 'tomorrow', sans-serif;
   color:#0B91E9;
+  height: 20px;
 }
 
 select {
@@ -125,6 +143,7 @@ select {
   font-size: 20px;
   font-family: 'tomorrow', sans-serif;
   color:#0B91E9;
+  height: 25px;
 }
 
 .logoRight {
