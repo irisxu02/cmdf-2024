@@ -11,6 +11,7 @@ const Basic = () => {
   const [role, setRole] = useState("");
   const [length, setLength] = useState("");
   const [response, setResponse] = useState("");
+  const [mode, setMode] = useState("basic");
 
   const handleInputChange = (event) => {
     setInputValue(event.target.value);
@@ -26,22 +27,41 @@ const Basic = () => {
   };
 
   const handleSubmit = () => {
-    // Send a POST request to the Flask server
-    fetch("http://127.0.0.1:4999/data", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ inputValue, ageGroup, role, length }),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        setResponse(data);
-        console.log("Response from server:", data);
+    if (mode === "basic") {
+      // Send a POST request to the Flask server
+      fetch("http://127.0.0.1:4999/basic", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ inputValue, ageGroup}),
       })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
+        .then((res) => res.json())
+        .then((data) => {
+          setResponse(data);
+          console.log("Response from server:", data);
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+        });
+    } else {
+      // Send a POST request to the Flask server
+      fetch("http://127.0.0.1:4999/advanced", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ inputValue, ageGroup, role, length }),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          setResponse(data);
+          console.log("Response from server:", data);
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+        });
+    }
   };
 
   const [promptContent, setPromptContent] = useState(
@@ -61,6 +81,7 @@ const Basic = () => {
     );
     setBasicButtonClass("subheading gradientFont");
     setAdvancedButtonClass("subheading gradientFont grey");
+    setMode("basic");
   };
 
   const handleAdvancedClick = () => {
@@ -85,6 +106,7 @@ const Basic = () => {
     );
     setBasicButtonClass("subheading gradientFont grey");
     setAdvancedButtonClass("subheading gradientFont");
+    setMode("advanced");
   };
 
   return (
