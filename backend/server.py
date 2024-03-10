@@ -15,18 +15,9 @@ def get_data():
         return add_cors_headers(make_response()), 200
     if request.method == 'POST':
         data = request.json
+        print(data["inputValue"])
         # handle data here
         return add_cors_headers(jsonify(data))
-    # if request.method == 'GET':
-    # # returning sample data for now
-    #     data = {
-    #         "Name": "John Doe",
-    #         "Age": 30,
-    #         "Date": "2024-03-09",
-    #         "programming": "Python"
-    #     }
-    response = make_response(jsonify(data))
-    return add_cors_headers(response)
 
 # Running app
 if __name__ == '__main__':
