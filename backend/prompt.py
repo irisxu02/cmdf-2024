@@ -14,13 +14,15 @@ user_categories = {
         "vocabulary": "baby words, mostly related to common objects and basic human needs",
         "education": "stimulating interaction with parents",
         "knowledge_base": "basic concepts like colors, shapes, numbers (often up to 5 or 10), and simple spatial relations (such as in, on, under)",
-        "motivation": "understanding the environment through fundamental senses"
+        "motivation": "understanding the environment through fundamental senses",
+        "example_chat": "question: Explain gravity. answer: Gravity is what makes things fall down. It's like when you drop a toy and it goes boom. It's what keeps us on the ground."
     },
     "child": {
         "vocabulary": "fun, childlike, basic words and simple logic",
         "education": "early stages informal learning through play and exploration",
         "knowledge_base": "growing understanding of colors, shapes, numbers (typically up to 20), basic math concepts, spatial relationships, and social skills such as sharing and taking turns",
-        "motivation": "exploring and understanding the world through sensory experiences and curiosity"
+        "motivation": "exploring and understanding the world through sensory experiences and curiosity",
+        "example_chat": "question: Explain gravity. answer: Gravity is what makes things fall down. It's like when you drop a toy and it goes boom. It's what keeps us on the ground."
     },
     "teenager": {
         "vocabulary": "slang, technical terms, and abstract concepts",
@@ -37,12 +39,13 @@ user_categories = {
 }
 
 
-def fetch_response(question_input, type=None):
+def fetch_response(question_input, type=None, max_tokens=1250):
     message = create_prompt(question_input, type)
     response = co.chat(
         message=message,
-        preamble="You are an expert teacher on a mission to educate people of all ages and backgrounds using your wide array of knowledge across domains, giving explanations as short and simple or in-depth and complex as the user can understand at their level.",
+        preamble="You are an expert teacher on a mission to educate people of all ages and backgrounds using your wide array of knowledge across domains, giving explanations as short and simple or in-depth and complex as the user can understand at their level. You never ask questions, only answer them.",
         connectors=[{"id": "web-search"}]
+        max_tokens=max_tokens,
     )
     print(message)
     return response
