@@ -1,10 +1,14 @@
 from flask import Flask, jsonify, make_response, request
-import prompt
 from io import BytesIO
 import os
 import pdfkit
+from dotenv import load_dotenv
+from prompt import KnowledgeExpert
+
 
 app = Flask(__name__)
+expert = None
+expert_initialized = False
 
 # Helper function to set CORS headers
 def add_cors_headers(response):
@@ -12,6 +16,16 @@ def add_cors_headers(response):
     response.headers['Access-Control-Allow-Headers'] = 'Content-Type'
     response.headers['Access-Control-Allow-Methods'] = 'GET, POST, PUT, DELETE, OPTIONS'
     return response
+
+
+def init_expert():
+    global expert, expert_initialized
+    if not expert_initialized:
+        load_dotenv()
+        cohere_key = os.getenv('CO_API_KEY')
+        expert = KnowledgeExpert(cohere_key)
+        expert_initialized = True
+
 
 @app.route('/upload', methods=['GET', 'POST', 'OPTIONS'])
 def get_upload():
@@ -45,15 +59,17 @@ def get_data():
         print(data["role"])
         print(data["length"])
         print(f'READ INPUT: {data["inputValue"]}')
-        response = prompt.fetch_response(data["inputValue"])
+        response = expert.fetch_response(data["inputValue"])
         print(f"COHERE RESPONSE: {response.text}")
-        citations = prompt.list_citations(response)
+        citations = expert.list_citations(response)
         response_with_citations = {
-        "text": response.text,
-        "citations": citations
-    }
+            "text": response.text,
+            "citations": citations
+        }
         return add_cors_headers(jsonify(response_with_citations))
+
 
 # Running app
 if __name__ == '__main__':
+    init_expert()
     app.run(host='0.0.0.0', port=4999, debug=True)
