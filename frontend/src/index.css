@@ -35,6 +35,21 @@ code {
   z-index: 10;
 }
 
+.grey {
+  color: rgb(197, 197, 197) !important;
+  cursor: pointer;
+}
+
+.icon {
+  font-size: 20px;
+  color: #0B91E9;
+  cursor: pointer;
+  text-decoration: none;
+  background-color: white;
+  border: none;
+  
+}
+
 .subheading {
   font-size: 30px;
   font-family: 'tomorrow', sans-serif;
@@ -42,8 +57,13 @@ code {
   z-index: 10;
 }
 
+.views {
+  display: flex;
+  gap: 50px;
+}
+
 .subtext {
-  font-size: 25px;
+  font-size: 20px;
   font-family: 'tomorrow', sans-serif;
   font-weight: 400;
   z-index: 10;
@@ -69,6 +89,13 @@ input {
   padding:  100px 200px;
 }
 
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
 .prompt {
   display: flex;
   padding-top: 50px;
@@ -79,13 +106,30 @@ input {
   margin-bottom: 40px; /* Add margin at the bottom to create vertical space between rows */
 }
 
+.prompt2 {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: -20px;
+}
+
+
 .fullWidthInput {
-  width: calc(100% - 120px);
+  width: calc(100% - 180px);
   margin: 0 10px;
   margin-bottom: 40px; 
   border-bottom: #0B91E9 2px solid;
   font-family: 'tomorrow', sans-serif;
   color:#0B91E9;
+}
+
+.inputField {
+  width: 200px;
+  margin: 0 10px;
+  margin-bottom: 40px; 
+  border-bottom: #0B91E9 2px solid;
+  font-family: 'tomorrow', sans-serif;
+  color:#0B91E9;
+  height: 20px;
 }
 
 select {
@@ -99,6 +143,7 @@ select {
   font-size: 20px;
   font-family: 'tomorrow', sans-serif;
   color:#0B91E9;
+  height: 25px;
 }
 
 .logoRight {
