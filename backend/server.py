@@ -42,11 +42,17 @@ def get_data():
     if request.method == 'POST':
         data = request.json
         print(data["ageGroup"])
+        print(data["role"])
+        print(data["length"])
         print(f'READ INPUT: {data["inputValue"]}')
         response = prompt.fetch_response(data["inputValue"])
         print(f"COHERE RESPONSE: {response.text}")
         citations = prompt.list_citations(response)
-        return add_cors_headers(jsonify(response.text))
+        response_with_citations = {
+        "text": response.text,
+        "citations": citations
+    }
+        return add_cors_headers(jsonify(response_with_citations))
 
 # Running app
 if __name__ == '__main__':
