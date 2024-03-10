@@ -20,6 +20,8 @@ const Basic = () => {
   console.log(location.state);
   const [mode, setMode] = useState(initialMode);
   const [isLoading, setIsLoading] = useState(false);
+  const [selectedPDF, setSelectedPDF] = useState(null);
+
 
   const handleInputChange = (event) => {
     setInputValue(event.target.value);
@@ -34,6 +36,26 @@ const Basic = () => {
     setRole(event.target.value);
   };
 
+  const handleSubmitPDF = async () => {
+    const formData = new FormData();
+    formData.append('pdfFile', selectedPDF);
+
+    try {
+      const response = await fetch("http://127.0.0.1:4999/upload", {
+        method: 'POST',
+        body: formData,
+      });
+
+      if (response.ok) {
+        console.log('File uploaded successfully:', response);
+      } else {
+        console.error('Error uploading file:', response.statusText);
+      }
+    } catch (error) {
+      console.error('Error uploading file:', error);
+    }
+  };
+
   const handleSubmit = () => {
     setIsLoading(true);
     // Scroll to the response id div
@@ -43,6 +65,9 @@ const Basic = () => {
       top: document.getElementById("response").offsetTop,
       behavior: "smooth",
     });
+    if (inputValue.includes(".pdf")) {
+      handleSubmitPDF()
+    }
     if (mode === "basic") {
       // Send a POST request to the Flask server
       fetch("http://127.0.0.1:4999/basic", {
@@ -271,6 +296,7 @@ const Basic = () => {
               value={inputValue}
             />
             <VoiceInput setInput={setInputValue} />
+            <PDFUpload setInput={setInputValue} setPDF={setSelectedPDF} pdf={selectedPDF}/>
             <div className="subtext">To Me Like I'm</div>
             <select
               id="age"
@@ -316,8 +342,6 @@ const Basic = () => {
               EXPLAIN
             </button>
           </div>
-          
-          {/* <PDFUpload /> */}
         </div>
         <div className="response" id="response">
             <div className="subheading gradientFont">EMILI says...</div>
