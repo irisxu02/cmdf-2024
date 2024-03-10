@@ -391,7 +391,7 @@ const Basic = () => {
                       href={citation}
                       target="_blank"
                       rel="noopener noreferrer"
-                      style={{ color: "white" }}
+                      style={{ color: "#0B91E9" }}
                     >
                       {citation}
                     </a>
