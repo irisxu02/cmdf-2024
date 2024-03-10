@@ -57,9 +57,9 @@ def get_basic_data():
         data = request.json
         print(data["ageGroup"])
         print(f'READ INPUT: {data["inputValue"]}')
-        response = prompt.fetch_response(data["inputValue"])
+        response = expert.fetch_response(data["inputValue"])
         print(f"COHERE RESPONSE: {response.text}")
-        citations = prompt.list_citations(response)
+        citations = expert.list_citations(response)
         response_with_citations = {
         "text": response.text,
         "citations": citations
