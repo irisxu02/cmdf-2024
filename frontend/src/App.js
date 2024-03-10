@@ -1,7 +1,21 @@
 import React, { useState } from "react";
 import "./App.css";
+import { Routes, Route } from "react-router-dom";
+import Home from "./pages/Home";
+import { BrowserRouter } from 'react-router-dom';
+import GoogleFontLoader from 'react-google-font-loader';
+import Basic from "./pages/Basic";
+import Advanced from "./pages/Advanced";
+// import particlesJS from 'react-particles-js';
+
+
+// particlesJS.load('particles-js', 'assets/particles.json', function() {
+// 	console.log('callback - particles.js config loaded');
+//   });
+
 
 function App() {
+
 	const [inputValue, setInputValue] = useState('');
 	const [ageGroup, setAgeGroup] = useState('toddler');
 	const [response, setResponse] = useState("");
@@ -32,24 +46,37 @@ function App() {
     };
 
 	return (
-		<div className="App">
-			<header className="App-header">
-				<input 
-					type="text" 
-					value={inputValue} 
-					onChange={handleInputChange} 
-      			/>
-				<select name="age" id="age" onChange={handleAgeChange}>
-					<option value="toddler">Toddler</option>
-					<option value="child">Child</option>
-					<option value="teenager">Teenager</option>
-					<option value="adult">Adult</option>
-				</select>
-				<button onClick={handleSubmit}>submit</button>
-				<p>{response}</p>
-			</header>
-		</div>
-	);
+	<BrowserRouter>
+	<GoogleFontLoader
+        fonts={[
+          {
+            font: 'Tomorrow',
+            weights: [100, 200, 300, 400, 500, 600, 700, 800, 900],
+          },
+        ]}
+      />
+    <Routes>
+      <Route path="/" element={<Home />} />
+	  <Route path="/basic" element={<Basic />} />
+	  <Route path="/advanced" element={<Advanced />} />
+      <Route
+        path="*"
+        element={
+          <div className="App">
+            <header className="App-header">
+              <h1>React and flask</h1>
+              {/* Calling a data from setdata for showing */}
+              <p>{data.name}</p>
+              <p>{data.age}</p>
+              <p>{data.date}</p>
+              <p>{data.programming}</p>
+            </header>
+          </div>
+        }
+      />
+    </Routes>
+	</BrowserRouter>
+  );
 }
 
 export default App;
