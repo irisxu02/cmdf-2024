@@ -1,4 +1,4 @@
-# cmdf-2024
+# Explain it EMILI
 
 ## Running without Docker
 In Backend:
