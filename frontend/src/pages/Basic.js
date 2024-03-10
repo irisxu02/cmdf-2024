@@ -8,14 +8,21 @@ import "../index.css";
 const Basic = () => {
   const [inputValue, setInputValue] = useState("");
   const [ageGroup, setAgeGroup] = useState("toddler");
+  const [role, setRole] = useState("");
+  const [length, setLength] = useState("");
   const [response, setResponse] = useState("");
 
-  console.log("inputValue:", inputValue);
   const handleInputChange = (event) => {
     setInputValue(event.target.value);
   };
   const handleAgeChange = (event) => {
     setAgeGroup(event.target.value);
+  };
+  const handleLengthChange = (event) => {
+    setLength(event.target.value);
+  };
+  const handleRoleChange = (event) => {
+    setRole(event.target.value);
   };
 
   const handleSubmit = () => {
@@ -25,7 +32,7 @@ const Basic = () => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ inputValue, ageGroup }),
+      body: JSON.stringify({ inputValue, ageGroup, role, length }),
     })
       .then((res) => res.json())
       .then((data) => {
@@ -66,9 +73,10 @@ const Basic = () => {
           name="explain"
           class="inputField"
           placeholder="role type"
+          onChange={handleRoleChange}
         />
         <div className="subtext">in a </div>
-        <select id="length" name="age" class="dropdown">
+        <select id="length" name="age" class="dropdown" onChange={handleLengthChange}>
           <option value="sentence">sentence.</option>
           <option value="paragraph">paragraph.</option>
           <option value="page">page.</option>
@@ -118,7 +126,7 @@ const Basic = () => {
         />
         <VoiceInput setInput={setInputValue} />
         <div className="subtext">To Me Like I'm</div>
-        <select id="age" name="age" class="dropdown">
+        <select id="age" name="age" class="dropdown" onChange={handleAgeChange}>
           <option value="0-10">a Toddler</option>
           <option value="11-20">a Child</option>
           <option value="21-30">a Teenager</option>
@@ -129,7 +137,7 @@ const Basic = () => {
           
           <div className="center">
             <button onClick={handleSubmit} className="fancy center">EXPLAIN</button>
-            <p>{response}</p>
+            <p>{response.text}</p>
           </div>
           <PDFUpload />
         </div>
