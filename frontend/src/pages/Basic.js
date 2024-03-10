@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import logo from "../imgs/logo.png";
+import loading from "../imgs/load-35_256.gif";
 import VoiceInput from "../VoiceInput";
 import PDFUpload from "../pdfUpload";
 import "../index.css";
@@ -9,8 +10,9 @@ const Basic = () => {
   const [inputValue, setInputValue] = useState("");
   const [ageGroup, setAgeGroup] = useState("toddler");
   const [response, setResponse] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [mode, setMode] = useState("basic");
 
-  console.log("inputValue:", inputValue);
   const handleInputChange = (event) => {
     setInputValue(event.target.value);
   };
@@ -19,6 +21,15 @@ const Basic = () => {
   };
 
   const handleSubmit = () => {
+    // Change the content of the response id div to be a loading message
+    setIsLoading(true);
+    // Scroll to the response id div
+    document.getElementById("response").style.height = "1000px";
+    document.getElementById("response").style.display = "flex";
+    window.scrollTo({
+      top: document.getElementById("response").offsetTop,
+      behavior: "smooth",
+    });
     // Send a POST request to the Flask server
     fetch("http://127.0.0.1:4999/data", {
       method: "POST",
@@ -37,9 +48,7 @@ const Basic = () => {
       });
   };
 
-  const [promptContent, setPromptContent] = useState(
-    ""
-  );
+  const [promptContent, setPromptContent] = useState("");
 
   const [basicButtonClass, setBasicButtonClass] = useState(
     "subheading gradientFont"
@@ -49,11 +58,10 @@ const Basic = () => {
   );
 
   const handleBasicClick = () => {
-    setPromptContent(
-      ""
-    );
+    setPromptContent("");
     setBasicButtonClass("subheading gradientFont");
     setAdvancedButtonClass("subheading gradientFont grey");
+    setMode("basic");
   };
 
   const handleAdvancedClick = () => {
@@ -77,6 +85,7 @@ const Basic = () => {
     );
     setBasicButtonClass("subheading gradientFont grey");
     setAdvancedButtonClass("subheading gradientFont");
+    setMode("advanced");
   };
 
   return (
@@ -106,32 +115,37 @@ const Basic = () => {
             </div>
           </div>
           <div className="prompt">
-        <div className="subtext">Explain</div>
-        <input
-          type="text"
-          id="explain"
-          name="explain"
-          class="fullWidthInput"
-          placeholder="type something you want to know here..."
-          onChange={handleInputChange}
-          value={inputValue}
-        />
-        <VoiceInput setInput={setInputValue} />
-        <div className="subtext">To Me Like I'm</div>
-        <select id="age" name="age" class="dropdown">
-          <option value="0-10">a Toddler</option>
-          <option value="11-20">a Child</option>
-          <option value="21-30">a Teenager</option>
-          <option value="31-40">an Adult</option>
-        </select>
-        {promptContent}
-      </div>
-          
-          <div className="center">
-            <button onClick={handleSubmit} className="fancy center">EXPLAIN</button>
-            <p>{response}</p>
+            <div className="subtext">Explain</div>
+            <input
+              type="text"
+              id="explain"
+              name="explain"
+              class="fullWidthInput"
+              placeholder="type something you want to know here..."
+              onChange={handleInputChange}
+              value={inputValue}
+            />
+            <VoiceInput setInput={setInputValue} />
+            <div className="subtext">To Me Like I'm</div>
+            <select id="age" name="age" class="dropdown">
+              <option value="0-10">a Toddler</option>
+              <option value="11-20">a Child</option>
+              <option value="21-30">a Teenager</option>
+              <option value="31-40">an Adult</option>
+            </select>
+            {promptContent}
           </div>
-          <PDFUpload />
+
+          <div className="center">
+            <button onClick={handleSubmit} className="fancy">
+              EXPLAIN
+            </button>
+          </div>
+          <div className="response" id="response">
+            <div className="subheading gradientFont">EMILI says...</div>
+            {isLoading && <img src={loading} alt="Loading..." />}
+            {!isLoading && response}
+          </div>
         </div>
       </main>
     </>
