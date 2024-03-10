@@ -5,7 +5,7 @@ class KnowledgeExpert:
     def __init__(self, cohere_key):
         self.co = cohere.Client(cohere_key)
         self.user_categories = {
-            "toddler": {
+            "baby": {
                 "vocabulary": "baby words, mostly related to common objects and basic human needs",
                 "education": "stimulating interaction with parents",
                 "knowledge_base": "basic concepts like colors, shapes, numbers (often up to 5 or 10), and simple spatial relations (such as in, on, under)",
@@ -64,6 +64,27 @@ class KnowledgeExpert:
         print(message)
         return response
 
+    def get_doc_summary(self, text, type=None, role=None):
+        response = self.co.summarize(
+            text=text,
+            max_tokens=self.max_tokens,
+            additional_command=f"Based on my knowledge as a {type} and my background as a {role}.",
+            length=decide_length(type=type, format=self.format_preference),
+            format="bullets" if self.format_preference == "point form" else "paragraph"
+        )
+        return response
+
+
+    # helper function to decide the length of the response
+    def decide_length(self, type):
+        age_to_lengths = {
+            "baby": "short",
+            "child": "short",
+            "teenager": "medium",
+            "adult": "long"
+        }
+        return age_to_lengths.get(type, "medium")
+        
     
     def create_prompt(self, question_input, type=None):
         if type is None:
