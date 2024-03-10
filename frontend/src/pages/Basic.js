@@ -264,7 +264,7 @@ const Basic = () => {
   return (
     <>
       <main className="basicContent">
-      <ScrollToTopButton handleClick={handleGoUp} />
+        <ScrollToTopButton handleClick={handleGoUp} />
         <div id="particles-js"></div>
         <div id="logoRight" className="logoRight">
           <div style={{ display: "flex", alignItems: "center", gap: "20px" }}>
@@ -314,7 +314,9 @@ const Basic = () => {
               pdf={selectedPDF}
             />
             <div className="subtext">To Me Like I'm</div>
-            <label for="age" style={{position: "absolute", left: "-9999px"}}>Age:</label>
+            <label for="age" style={{ position: "absolute", left: "-9999px" }}>
+              Age:
+            </label>
             <select
               id="age"
               name="age"
@@ -344,9 +346,9 @@ const Basic = () => {
                   class="dropdown"
                   onChange={handleLengthChange}
                 >
-                  <option value="pointform">point form</option>
-                  <option value="sentence">a sentence</option>
                   <option value="paragraph">a paragraph</option>
+                  <option value="pointform">point form</option>
+                  <option value="page">a page</option>
                 </select>
               </div>
             ) : (
@@ -355,7 +357,11 @@ const Basic = () => {
             <div className="subtext">.</div>
           </div>
           <div className="center">
-            <button onClick={handleSubmit} className="fancy center" aria-label="explain">
+            <button
+              onClick={handleSubmit}
+              className="fancy center"
+              aria-label="explain"
+            >
               EXPLAIN
             </button>
           </div>
@@ -366,7 +372,12 @@ const Basic = () => {
 
           {!isLoading && response.text && (
             <div className="responseText">
-              {response.text}
+              {response.text?.split("\n").map((line, index) => {
+                if (line.trim().startsWith("-")) {
+                  return <p key={index}>{line.trim()}</p>;
+                }
+                return <p key={index}>{line}</p>;
+              })}
               <div
                 class="subtext gradientFont"
                 style={{ paddingTop: "20px", fontWeight: "500" }}
