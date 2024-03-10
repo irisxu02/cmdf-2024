@@ -81,10 +81,10 @@ def get_basic_data():
         global pdf_uploaded
         if data["inputValue"] in pdf_uploaded:
             text = get_text(pdf_uploaded)
-            response = expert.fetch_response(text)
+            response = expert.get_doc_summary(text, type=data["ageGroup"])
         else:
             pdf_uploaded = ""
-            response = expert.test_simple_response(data["inputValue"])  # TODO: use fetch_response
+            response = expert.fetch_response(data["inputValue"])  # TODO: use fetch_response
             print(f"COHERE RESPONSE: {response.text}")
         
         citations = expert.list_citations(response)
@@ -110,7 +110,7 @@ def get_advanced_data():
         global pdf_uploaded
         if data["inputValue"] in pdf_uploaded:
             text = get_text(pdf_uploaded)
-            response = expert.fetch_response(text, type=data["ageGroup"], role=data["role"])
+            response = expert.get_doc_summary(text, type=data["ageGroup"], role=data["role"])
         else: # text input only mode
             pdf_uploaded = ""
             response = expert.fetch_response(data["inputValue"], type=data["ageGroup"], role=data["role"])
