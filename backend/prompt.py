@@ -34,7 +34,7 @@ class KnowledgeExpert:
         }
         self.format_preference = "paragraph" # default
 
-    def set_format_preference(format):
+    def set_format_preference(self, format):
         self.format_preference = {"point form": "short point form, limited to 3-5 bullet points",
                                   "paragraph": "paragraph form, 3-5 sentences",
                                   "page": "comprehensive, detailed explanation, 10+ sentences"}.get(format, "paragraph")
@@ -48,7 +48,7 @@ class KnowledgeExpert:
             message="explain gravity like I am a kid, in point form",
             preamble="You are an expert teacher on a mission to educate people of all ages and backgrounds using your wide array of knowledge across domains, giving explanations as short and simple or in-depth and complex as the user can understand at their level. You never ask questions, only answer them.",
             connectors=[{"id": "web-search"}],
-            max_tokens=max_tokens,
+            max_tokens=self.max_tokens,
         )
         return response
     
@@ -59,11 +59,12 @@ class KnowledgeExpert:
             message=message,
             preamble="You are an expert teacher on a mission to educate people of all ages and backgrounds using your wide array of knowledge across domains, giving explanations as short and simple or in-depth and complex as the user can understand at their level. You never ask questions, only answer them.",
             connectors=[{"id": "web-search"}],
-            max_tokens=max_tokens,
+            max_tokens=self.max_tokens,
         )
         print(message)
         return response
 
+    
     def create_prompt(self, question_input, type=None):
         if type is None:
             return f"Explain {question_input}."

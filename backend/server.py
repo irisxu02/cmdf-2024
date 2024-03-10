@@ -9,7 +9,7 @@ from document_processor import get_text
 app = Flask(__name__, static_folder='../frontend/build')
 expert = None  # the object that queries the cohere API
 expert_initialized = False  # flag to check if the expert object has been initialized TODO: improve this
-pdf_uploaded = None  # global flag to store the uploaded pdf file path
+pdf_uploaded = ""  # global flag to store the uploaded pdf file path
 
 
 # Helper function to set CORS headers
@@ -20,12 +20,13 @@ def add_cors_headers(response):
     return response
 
 
-def init_expert():
-    global expert, expert_initialized
+def init():
+    global expert, expert_initialized, pdf_uploaded
     if not expert_initialized:
         load_dotenv()
         cohere_key = os.getenv('CO_API_KEY')
         expert = KnowledgeExpert(cohere_key)
+    pdf_uploaded = ""
 
 
 # Helper function to get file extension
@@ -63,6 +64,7 @@ def get_upload():
             f.write(file_bytes)
 
         d['status'] = 1
+        global pdf_uploaded
         pdf_uploaded = pdf_filename
         return add_cors_headers(jsonify("PDF Received"))
     
@@ -75,7 +77,9 @@ def get_basic_data():
         print(data["ageGroup"])
         print(f'READ INPUT: {data["inputValue"]}')
         
-        if pdf_uploaded and data["inputValue"] in pdf_uploaded:
+        # pdf mode
+        global pdf_uploaded
+        if data["inputValue"] in pdf_uploaded:
             text = get_text(pdf_uploaded)
             response = expert.fetch_response(text)
         else:
@@ -98,12 +102,13 @@ def get_advanced_data():
         data = request.json
         print(data["ageGroup"]) # "baby", "child", "teen", "adult"
         print(data["role"]) # Any
-        print(data["length"]) # point form, sentence, paragraph
+        print(f'length: {len([data["length"].split(" ")])}') # point form, sentence, paragraph
         expert.set_format_preference(data["length"])
         print(f'READ INPUT: {data["inputValue"]}')
 
         # pdf mode
-        if pdf_uploaded and data["inputValue"] in pdf_uploaded:
+        global pdf_uploaded
+        if data["inputValue"] in pdf_uploaded:
             text = get_text(pdf_uploaded)
             response = expert.fetch_response(text, type=data["ageGroup"], role=data["role"])
         else: # text input only mode
@@ -121,6 +126,6 @@ def get_advanced_data():
 
 # Running app
 if __name__ == '__main__':
-    init_expert()
+    init()
     app.run(host='0.0.0.0', port=4999, debug=True)
     
