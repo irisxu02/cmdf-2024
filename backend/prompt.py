@@ -33,6 +33,7 @@ class KnowledgeExpert:
             }
         }
         self.format_preference = "paragraph" # default
+        self.max_tokers = 500 # default
 
     def set_format_preference(self, format):
         self.format_preference = {"point form": "short point form, limited to 3-5 bullet points",
