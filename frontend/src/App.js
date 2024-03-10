@@ -26,8 +26,7 @@ function App() {
       />
     <Routes>
       <Route path="/" element={<Home />} />
-	  <Route path="/basic" element={<Basic />} />
-	  <Route path="/advanced" element={<Advanced />} />
+	  <Route path="/demo" element={<Basic />} />
     </Routes>
 	</BrowserRouter>
   );
