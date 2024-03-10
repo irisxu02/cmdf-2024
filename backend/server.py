@@ -1,6 +1,6 @@
 from flask import Flask, jsonify, make_response, request
 import prompt
-
+from io import BytesIO
 
 app = Flask(__name__)
 
@@ -16,9 +16,17 @@ def get_upload():
     if request.method == 'OPTIONS':
         return add_cors_headers(make_response()), 200
     if request.method == 'POST':
+        d = {}
+        file = request.files['pdfFile']
+        filename = file.filename
+        print(f"Uploading file {filename}")
+        file_bytes = file.read()
+        file_content = BytesIO(file_bytes).readlines()
+        print(file_content)
+        d['status'] = 1
         # data = request.json
         # print(data)
-        return add_cors_headers(jsonify("hello"))
+        return add_cors_headers(jsonify("PDF Received"))
     
 @app.route('/data', methods=['GET', 'POST', 'OPTIONS'])
 def get_data():
