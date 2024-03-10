@@ -146,7 +146,7 @@ const Home = () => {
               <img src={logo} alt="logo" />
             </Link>
             <div className="title">Explain It To Me Like I'm...</div>
-            <div className="subtext">
+            <div className="subtext middle">
               Have a topic you need explaining? A question you need answering?
               No problem, Emili has the answer to it all.
             </div>

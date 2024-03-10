@@ -16,6 +16,7 @@ const Toggle = () => {
     <div
       className={`toggle-container ${isDarkMode ? "dark" : "light"}`}
       onClick={handleToggle}
+      aria-label="dark mode toggle"
     >
       <div className={`toggle-thumb ${isDarkMode ? "dark" : "light"}`}>
         {isDarkMode ? <FaMoon /> : <FaSun />}
