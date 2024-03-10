@@ -304,10 +304,10 @@ const Basic = () => {
               class="dropdown"
               onChange={handleAgeChange}
             >
-              <option value="0-10">a Toddler</option>
-              <option value="11-20">a Child</option>
-              <option value="21-30">a Teenager</option>
-              <option value="31-40">an Adult</option>
+              <option value="baby">a Baby</option>
+              <option value="child">a Child</option>
+              <option value="teenager">a Teenager</option>
+              <option value="adult">an Adult</option>
             </select>
             {mode == "advanced" ? (
               <div id="prompt" className="prompt2">
