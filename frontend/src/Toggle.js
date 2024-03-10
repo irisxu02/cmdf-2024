@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./index.css";
-import { FaMicrophone } from "react-icons/fa";
 import { FaMoon, FaSun } from "react-icons/fa";
 
 const Toggle = () => {
@@ -9,8 +8,25 @@ const Toggle = () => {
   const handleToggle = () => {
     setIsDarkMode(!isDarkMode);
   };
-  document.body.style.backgroundColor = isDarkMode ? 'black' : 'white';
-  document.body.style.color = isDarkMode ? 'white' : 'black';
+
+  useEffect(() => {
+    document.body.style.backgroundColor = isDarkMode ? "black" : "white";
+    document.body.style.color = isDarkMode ? "white" : "black";
+  }, [isDarkMode]);
+
+  useEffect(() => {
+    const handleKeyPress = (event) => {
+      if (event.key === "Enter") {
+        setIsDarkMode(!isDarkMode);
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyPress);
+
+    return () => {
+      document.removeEventListener("keydown", handleKeyPress);
+    };
+  }, [isDarkMode]);
 
   return (
     <div
