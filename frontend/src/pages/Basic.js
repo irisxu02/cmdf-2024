@@ -56,7 +56,7 @@ const Basic = () => {
   const handleSubmit = () => {
     setIsLoading(true);
     // Scroll to the response id div
-    document.getElementById("response").style.height = "700px";
+    document.getElementById("response").style.minHeight = "700px";
     document.getElementById("response").style.display = "flex";
     window.scrollTo({
       top: document.getElementById("response").offsetTop,
@@ -96,6 +96,7 @@ const Basic = () => {
         .then((res) => res.json())
         .then((data) => {
           setResponse(data);
+          setIsLoading(false);
           console.log("Response from server:", data);
         })
         .catch((error) => {
@@ -362,7 +363,14 @@ const Basic = () => {
               <ol class="sources-container">
                 {response.citations.map((citation, index) => (
                   <li key={index} className="source">
-                    {citation}
+                    <a
+                      href={citation}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{ color: "white" }}
+                    >
+                      {citation}
+                    </a>
                   </li>
                 ))}
               </ol>
