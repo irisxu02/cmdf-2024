@@ -1,4 +1,6 @@
 from flask import Flask, jsonify, make_response, request
+import prompt
+
 
 app = Flask(__name__)
 
@@ -16,6 +18,7 @@ def get_data():
     if request.method == 'POST':
         data = request.json
         print(data["inputValue"])
+        answer = prompt.fetch_answer(data["inputValue"])
         # handle data here
         return add_cors_headers(jsonify(data))
 
