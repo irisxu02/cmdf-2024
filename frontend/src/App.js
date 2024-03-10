@@ -4,6 +4,7 @@ import "./App.css";
 function App() {
 	const [inputValue, setInputValue] = useState('');
 	const [ageGroup, setAgeGroup] = useState('toddler');
+	const [response, setResponse] = useState("");
 	const handleInputChange = (event) => {
 		setInputValue(event.target.value);
 	  };
@@ -22,6 +23,7 @@ function App() {
         })
             .then((res) => res.json())
             .then((data) => {
+				setResponse(data);
                 console.log("Response from server:", data);
             })
             .catch((error) => {
@@ -44,6 +46,7 @@ function App() {
 					<option value="adult">Adult</option>
 				</select>
 				<button onClick={handleSubmit}>submit</button>
+				<p>{response}</p>
 			</header>
 		</div>
 	);

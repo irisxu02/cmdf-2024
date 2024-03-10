@@ -22,7 +22,7 @@ def get_data():
         answer = prompt.fetch_answer(data["inputValue"])
         print(answer)
         # handle data here
-        return add_cors_headers(jsonify(data))
+        return add_cors_headers(jsonify(answer))
 
 # Running app
 if __name__ == '__main__':
