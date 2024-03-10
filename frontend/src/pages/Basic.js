@@ -16,12 +16,9 @@ const Basic = () => {
   const [length, setLength] = useState("");
   const [response, setResponse] = useState("");
   const location = useLocation();
-  const initialMode = location.state ? location.state.mode : "basic"; // Get mode from location state
-  console.log(location.state);
-  const [mode, setMode] = useState(initialMode);
+  const [mode, setMode] = useState("basic");
   const [isLoading, setIsLoading] = useState(false);
   const [selectedPDF, setSelectedPDF] = useState(null);
-
 
   const handleInputChange = (event) => {
     setInputValue(event.target.value);
@@ -38,21 +35,21 @@ const Basic = () => {
 
   const handleSubmitPDF = async () => {
     const formData = new FormData();
-    formData.append('pdfFile', selectedPDF);
+    formData.append("pdfFile", selectedPDF);
 
     try {
       const response = await fetch("http://127.0.0.1:4999/upload", {
-        method: 'POST',
+        method: "POST",
         body: formData,
       });
 
       if (response.ok) {
-        console.log('File uploaded successfully:', response);
+        console.log("File uploaded successfully:", response);
       } else {
-        console.error('Error uploading file:', response.statusText);
+        console.error("Error uploading file:", response.statusText);
       }
     } catch (error) {
-      console.error('Error uploading file:', error);
+      console.error("Error uploading file:", error);
     }
   };
 
@@ -66,7 +63,7 @@ const Basic = () => {
       behavior: "smooth",
     });
     if (inputValue.includes(".pdf")) {
-      handleSubmitPDF()
+      handleSubmitPDF();
     }
     if (mode === "basic") {
       // Send a POST request to the Flask server
@@ -80,6 +77,8 @@ const Basic = () => {
         .then((res) => res.json())
         .then((data) => {
           setResponse(data);
+          setIsLoading(false);
+          console.log(isLoading);
           console.log("Response from server:", data);
         })
         .catch((error) => {
@@ -290,18 +289,22 @@ const Basic = () => {
               type="text"
               id="explain"
               name="explain"
-              class="fullWidthInput"
+              className="fullWidthInput"
               placeholder="type something you want to know here..."
               onChange={handleInputChange}
               value={inputValue}
             />
             <VoiceInput setInput={setInputValue} />
-            <PDFUpload setInput={setInputValue} setPDF={setSelectedPDF} pdf={selectedPDF}/>
+            <PDFUpload
+              setInput={setInputValue}
+              setPDF={setSelectedPDF}
+              pdf={selectedPDF}
+            />
             <div className="subtext">To Me Like I'm</div>
             <select
               id="age"
               name="age"
-              class="dropdown"
+              className="dropdown"
               onChange={handleAgeChange}
             >
               <option value="baby">a Baby</option>
@@ -344,10 +347,28 @@ const Basic = () => {
           </div>
         </div>
         <div className="response" id="response">
-            <div className="subheading gradientFont">EMILI says...</div>
-            {isLoading && <img src={loading} alt="Loading..." />}
-            {!isLoading && response}
-          </div>
+          <div className="subheading gradientFont">EMILI says...</div>
+          {isLoading && <img src={loading} alt="Loading..." />}
+
+          {!isLoading && response.text && (
+            <div className="responseText">
+              {response.text}
+              <div
+                class="subtext gradientFont"
+                style={{ paddingTop: "20px", fontWeight: "500" }}
+              >
+                Sources
+              </div>
+              <ol class="sources-container">
+                {response.citations.map((citation, index) => (
+                  <li key={index} className="source">
+                    {citation}
+                  </li>
+                ))}
+              </ol>
+            </div>
+          )}
+        </div>
       </main>
     </>
   );
