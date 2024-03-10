@@ -21,9 +21,18 @@ code {
   gap: 20px;
 }
 
+.logo img {
+  width: 80px;
+  height: 80px;
+}
+
+.logoRight img {
+  width: 50px;
+  height: 50px;
+}
+
 .homeContent {
   display: flex;
-  padding-top: 100px;
   align-items: center;
   flex-direction: column;
   height: 100vh;
@@ -105,6 +114,7 @@ input {
   box-shadow: inset 5px 5px 10px 0px rgba(255, 255, 255, .4), inset -5px -5px 10px 0px rgba(0, 0, 0, .4);
   backdrop-filter: blur(10px);
   max-width: 800px;
+  margin-bottom: 250px;
 }
 
 .basicContent {
@@ -118,7 +128,6 @@ input {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  margin-bottom: 50px;
 }
 
 .prompt {
@@ -190,6 +199,7 @@ select {
   align-items: center;
   gap: 100px;
   z-index: 1;
+  padding-top: 100px;
 }
 
 .fancy{

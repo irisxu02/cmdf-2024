@@ -294,16 +294,16 @@ const Basic = () => {
                   placeholder="role type"
                   onChange={handleRoleChange}
                 />
-                <div className="subtext">in a </div>
+                <div className="subtext">in </div>
                 <select
                   id="length"
                   name="age"
                   class="dropdown"
                   onChange={handleLengthChange}
                 >
-                  <option value="sentence">sentence</option>
-                  <option value="paragraph">paragraph</option>
-                  <option value="page">page</option>
+                  <option value="point form">point form</option>
+                  <option value="sentence">a sentence</option>
+                  <option value="paragraph">a paragraph</option>
                 </select>
               </div>
             ) : (

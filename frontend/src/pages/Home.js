@@ -146,10 +146,14 @@ const Home = () => {
               <img src={logo} alt="logo" />
             </Link>
             <div className="title">Explain It To Me Like I'm...</div>
+            <div className="subtext">
+              Have a topic you need explaining? A question you need answering?
+              No problem, Emili has the answer to it all.
+            </div>
           </div>
           <div className="navLinks">
             <Link to="/demo">
-              <button className="fancy">Get Started</button>
+              <button className="fancy">ASK EMILI</button>
             </Link>
             {/* Please explain this like im PETLI
             Explain it like im Elli
