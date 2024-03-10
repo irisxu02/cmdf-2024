@@ -271,6 +271,7 @@ const Basic = () => {
               value={inputValue}
             />
             <VoiceInput setInput={setInputValue} />
+            <PDFUpload setInput={setInputValue}/>
             <div className="subtext">To Me Like I'm</div>
             <select
               id="age"
@@ -316,8 +317,6 @@ const Basic = () => {
               EXPLAIN
             </button>
           </div>
-          
-          {/* <PDFUpload /> */}
         </div>
         <div className="response" id="response">
             <div className="subheading gradientFont">EMILI says...</div>

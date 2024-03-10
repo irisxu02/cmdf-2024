@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
+import { FaFileUpload } from "react-icons/fa";
+import { FaRegCheckCircle } from "react-icons/fa";
 
-const PDFUpload = () => {
+const PDFUpload = ({setInput}) => {
   const [selectedFile, setSelectedFile] = useState(null);
   const [uploadStatus, setUploadStatus] = useState(null);
 
   const handleFileChange = (event) => {
     setSelectedFile(event.target.files[0]);
+    setInput(event.target.files[0].name)
     // Reset upload status when a new file is selected
     setUploadStatus(null);
   };
@@ -35,10 +38,12 @@ const PDFUpload = () => {
 
   return (
     <div>
-      <input type="file" onChange={handleFileChange} accept=".pdf" />
-      <button onClick={handleSubmit}>Upload</button>
-      {uploadStatus === 'success' && <p style={{ color: 'green' }}>File uploaded successfully!</p>}
-      {uploadStatus === 'error' && <p style={{ color: 'red' }}>Error uploading file. Please try again.</p>}
+      <label htmlFor="fileInput">
+        <input htmlFor="fileInput" id="fileInput" type="file" onChange={handleFileChange} accept=".pdf" style={{ display: "none" }} />
+        <span className="icon">
+          {selectedFile ? <FaRegCheckCircle style={{ color: "0B91E9" }} /> :  <FaFileUpload style={{ color: "white" }} />}
+          </span>
+    </label>
     </div>
   );
 }
