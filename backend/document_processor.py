@@ -7,6 +7,8 @@ from io import StringIO
 def get_text(pdf_path='../demo_assets/EthicsofAI.pdf', pages=[1,2]):
     reader = PdfReader(pdf_path)
     parts = []
+	
+ 	# num_pages = len(reader.pages)
 
     def visitor_body(text, cm, tm, fontDict, fontSize):
         y = tm[5]
